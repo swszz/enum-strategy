@@ -18,12 +18,14 @@ repositories {
 
 dependencies {
     implementation(libs.kotlin.stblib)
-    implementation(libs.kotlin.coroutines.test)
+    implementation(libs.kotlin.reflect)
     implementation(libs.kotlin.coroutines.core)
+    implementation(libs.jackson.databind)
     testImplementation(libs.junit.api)
     testImplementation(libs.junit.engine.jupiter)
     testImplementation(libs.assertj)
     testImplementation(libs.kotlin.junit.test)
+    testImplementation(libs.kotlin.coroutines.test)
     testRuntimeOnly(libs.junit.platform.launcher)
 }
 

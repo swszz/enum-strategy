@@ -10,6 +10,7 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 
 [libraries]
 kotlin-stblib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlin-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlin-coroutine" }
 kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlin-coroutine" }
 
@@ -19,3 +20,4 @@ junit-engine-jupiter = { module = "org.junit.jupiter:junit-jupiter-engine", vers
 junit-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
 junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junit-platform" }
 assertj = { module = "org.assertj:assertj-core", version.ref = "assert4j" }
+jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version = "2.19.1" }
