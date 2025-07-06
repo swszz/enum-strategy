@@ -2,6 +2,7 @@ package com.github.swszz.enumstrategy
 
 import com.fasterxml.jackson.annotation.JsonValue
 import java.lang.reflect.ParameterizedType
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.reflect.KClass
 
 abstract class EnumString<E : Enum<E>, T : EnumString<E, T>>(
@@ -11,10 +12,14 @@ abstract class EnumString<E : Enum<E>, T : EnumString<E, T>>(
 
     @Suppress("UNCHECKED_CAST")
     private val klass: KClass<E> by lazy {
-        val superclass = this::class.java.genericSuperclass
-        val type = (superclass as ParameterizedType).actualTypeArguments.first() as Class<E>
-        type.kotlin
+        val clazz = this::class.java
+        ENUM_KLASS_CACHE.getOrPut(clazz) {
+            val superclass = clazz.genericSuperclass as ParameterizedType
+            val type = superclass.actualTypeArguments[0] as Class<*>
+            type.kotlin as KClass<out Enum<*>>
+        } as KClass<E>
     }
+
 
     fun toEnumOrNull(): E? = EnumFinder.findByNameOrNull(klass, value)
 
@@ -29,5 +34,10 @@ abstract class EnumString<E : Enum<E>, T : EnumString<E, T>>(
 
     override fun compareTo(other: EnumString<E, T>): Int {
         return value.compareTo(other.value)
+    }
+
+    companion object {
+        private val ENUM_KLASS_CACHE = ConcurrentHashMap<Class<*>, KClass<out Enum<*>>>()
+
     }
 }
